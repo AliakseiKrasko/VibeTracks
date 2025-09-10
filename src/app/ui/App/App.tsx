@@ -1,10 +1,11 @@
+import {Routing} from "@/common/routing/Routing.tsx";
 
 
 function App() {
 
   return (
     <>
-      <h1>App</h1>
+      <Routing />
     </>
   )
 }
