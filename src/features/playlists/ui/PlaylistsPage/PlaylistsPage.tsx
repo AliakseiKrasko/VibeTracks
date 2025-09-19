@@ -6,15 +6,24 @@ import type {PlaylistData, UpdatePlaylistArgs} from "@/features/playlists/api/pl
 import {useForm} from "react-hook-form";
 import {EditPlaylistForm} from "@/features/playlists/ui/PlaylistsPage/EditPlaylistForm/EditPlaylistForm.tsx";
 import {PlaylistItem} from "@/features/playlists/ui/PlaylistsPage/PlaylistItem/PlaylistItem.tsx";
+import {useDebounceValue} from "@/features/hooks/useDebounceValue.ts";
+import {Pagination} from "@/common/components/components/Pagination/Pagination.tsx";
 
 
 export const PlaylistsPage = () => {
     const [playlistId, setPlaylistId] = useState<string | null>(null)
     const [search, setSearch] = useState('')
+    const [currentPage, setCurrentPage] = useState(1)
+
+    const debounceSearch = useDebounceValue(search)
 
     const {register, handleSubmit, reset} = useForm<UpdatePlaylistArgs>()
 
-    const {data, isLoading} = useFetchPlaylistsQuery({search})
+    const {data, isLoading} = useFetchPlaylistsQuery({
+        search: debounceSearch,
+        pageNumber: currentPage,
+        pageSize: 2,
+    })
 
     const [deletePlaylist] = useDeletePlaylistMutation()
 
@@ -72,6 +81,11 @@ export const PlaylistsPage = () => {
                 })}
             </div>
             {!data?.data.length && !isLoading && <h2>Playlists not found</h2>}
+            <Pagination
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                pagesCount={data?.meta.pagesCount || 1}
+            />
         </div>
     )
 }
