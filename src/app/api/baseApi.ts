@@ -5,6 +5,7 @@ export const baseApi = createApi({
     tagTypes: ['Playlist'],
     keepUnusedDataFor: 30,
     refetchOnFocus: true,
+    refetchOnReconnect: true,
     baseQuery: fetchBaseQuery({
         baseUrl: import.meta.env.VITE_BASE_URL,
         headers: {
