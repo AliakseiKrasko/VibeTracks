@@ -9,7 +9,7 @@ import {PlaylistsList} from "@/features/playlists/ui/PlaylistsPage/PlaylistsList
 
 export const PlaylistsPage = () => {
     const [currentPage, setCurrentPage] = useState(1)
-    const [pageSize, setPageSize] = useState(2)
+    const [pageSize, setPageSize] = useState(16)
 
     const [search, setSearch] = useState('')
     const debounceSearch = useDebounceValue(search)

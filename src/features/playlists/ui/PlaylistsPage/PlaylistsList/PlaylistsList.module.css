@@ -1,12 +1,14 @@
 .items {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
-    flex-wrap: wrap;
 }
 
 .item {
-    width: 240px;
+    width: 100%; /* убираем фиксированные 240px */
     padding: 16px;
     border: 1px solid #ddd;
     border-radius: 8px;
+    background: #fff;
+    box-sizing: border-box; /* чтобы паддинги учитывались в ширине */
 }
