@@ -5,6 +5,7 @@ import {type ChangeEvent, useState} from "react";
 import {useDebounceValue} from "@/features/hooks/useDebounceValue.ts";
 import {Pagination} from "@/common/components/components/Pagination/Pagination.tsx";
 import {PlaylistsList} from "@/features/playlists/ui/PlaylistsPage/PlaylistsList/PlaylistsList.tsx";
+import {LinearProgress} from "@/common/components/components/LinearProgress/LinearProgress.tsx";
 
 
 export const PlaylistsPage = () => {
@@ -14,7 +15,7 @@ export const PlaylistsPage = () => {
     const [search, setSearch] = useState('')
     const debounceSearch = useDebounceValue(search)
 
-    const { data, isLoading } = useFetchPlaylistsQuery({
+    const { data, isLoading, isFetching } = useFetchPlaylistsQuery({
             search: debounceSearch,
             pageNumber: currentPage,
             pageSize,
@@ -47,6 +48,7 @@ export const PlaylistsPage = () => {
                 onChange={searchPlaylistHandler}
             />
             <PlaylistsList playlists={data?.data || []} isPlaylistsLoading={isLoading}/>
+            {isFetching && <LinearProgress />}
             <Pagination
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
