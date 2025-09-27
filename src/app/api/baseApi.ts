@@ -4,8 +4,8 @@ export const baseApi = createApi({
     reducerPath: 'baseApi',
     tagTypes: ['Playlist'],
     keepUnusedDataFor: 30,
-    refetchOnFocus: true,
-    refetchOnReconnect: true,
+    // refetchOnFocus: true,
+    // refetchOnReconnect: true,
     baseQuery: async (args, api, extraOptions) => {
         await new Promise(resolve => setTimeout(resolve, 2000)) // delay
 
