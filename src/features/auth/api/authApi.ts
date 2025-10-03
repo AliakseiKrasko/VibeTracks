@@ -6,7 +6,7 @@ export const authApi = baseApi.injectEndpoints({
         getMe: build.query<MeResponse, void>({
             query: () => `auth/me`,
         }),
-        login: build.mutation<LoginArgs, LoginResponse>({
+        login: build.mutation<LoginResponse, LoginArgs>({
             query: payload => ({
                 url: 'auth/login',
                 method: 'post',
@@ -16,4 +16,4 @@ export const authApi = baseApi.injectEndpoints({
     }),
 })
 
-export const { useGetMeQuery } = authApi
+export const { useGetMeQuery, useLoginMutation } = authApi
